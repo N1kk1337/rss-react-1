@@ -1,0 +1,13 @@
+@use '../../App.scss' as *;
+
+.search {
+    border: 4px dotted $call;
+    padding: 10px;
+    border-radius: 20px;
+    width: 400px;
+
+    &:focus {
+        outline: none;
+        border-color: $darkest;
+    }
+}

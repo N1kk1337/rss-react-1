@@ -1,8 +1,9 @@
 import React from "react"
+import styles from './SearchBar.module.scss'
 
 class SearchBar extends React.Component {
     render() {
-        return <h2>Hi!</h2>;
+        return <input className={styles.search} type='search' placeholder="Everybody's searching for something"></input>;
     }
 }
 
