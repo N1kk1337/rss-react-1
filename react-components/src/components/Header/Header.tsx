@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styles from './Header.module.scss'
 
 export interface HeaderProps {
-    location: string;
 
 }
 
@@ -11,13 +10,14 @@ export interface HeaderState {
 
 }
 
-class Header extends React.PureComponent<HeaderProps, HeaderState> {
+class Header extends React.Component<HeaderProps, HeaderState> {
     // state = { : }
 
 
     render() {
         let path = '';
-        switch (this.props.location) {
+        switch (location.pathname
+        ) {
             case "/":
                 path = 'Main Page';
                 break;
