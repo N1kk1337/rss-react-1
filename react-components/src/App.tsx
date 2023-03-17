@@ -9,7 +9,8 @@ import AboutPage from './pages/AboutPage/AboutPage';
 function App() {
   return (
     <BrowserRouter>
-      <Header />
+      <Header location={window.location.pathname
+      } />
       <main className="container">
         <Routes>
           <Route path="*" element={<ErrorPage />} />

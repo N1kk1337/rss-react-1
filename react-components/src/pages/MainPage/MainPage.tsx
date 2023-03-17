@@ -2,6 +2,7 @@ import Card from "../../components/Card/Card";
 import SearchBar from "../../components/SearchBar/SearchBar"
 import React from "react";
 import styles from './MainPage.module.scss'
+import CardList from "../../components/CardList/CardList";
 
 export interface MainPageProps {
 
@@ -17,7 +18,7 @@ class MainPage extends React.PureComponent<MainPageProps, MainPageState> {
         return (
             <div className={styles['main-page']}>
                 <SearchBar></SearchBar>
-                <Card></Card>
+                <CardList></CardList>
             </div>
         );
     }
