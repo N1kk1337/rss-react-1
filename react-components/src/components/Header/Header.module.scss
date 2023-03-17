@@ -1,29 +1,29 @@
-@use '../../App.scss' as *;
+@use '../../styles/mixins.scss' as *;
 
 .header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 15px 15px;
-    background-color: $dark;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 15px;
+  background-color: $dark;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .nav__btn {
-    @include basic-btn();
+  @include basic-btn();
 }
 
 .header__nav {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 .current-page {
-    @include center();
-    background-color: $light;
-    border: 4px solid $light;
-    border-radius: 15px;
-    padding: 10px;
+  @include center();
+  background-color: $light;
+  border: 4px solid $light;
+  border-radius: 15px;
+  padding: 10px;
 }

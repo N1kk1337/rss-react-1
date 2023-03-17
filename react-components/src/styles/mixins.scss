@@ -1,0 +1,35 @@
+$dark: #3d5a80;
+$medium: #98c1d9;
+$light: #e0fbfc;
+$call: #ee6c4d;
+$darkest: #293241;
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin basic-btn {
+  @include center();
+  background-color: $call;
+  border: 4px solid $darkest;
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 10px;
+
+  &:hover {
+    background-color: $light;
+  }
+
+  font-weight: 600;
+}
+
+@mixin container {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1200px;
+  height: 100%;
+}

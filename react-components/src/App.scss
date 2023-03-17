@@ -1,32 +1,4 @@
-@mixin center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin basic-btn {
-  @include center();
-  background-color: $call;
-  border: 4px solid $darkest;
-  border-radius: 15px;
-  cursor: pointer;
-  padding: 10px;
-
-  &:hover {
-    background-color: $light;
-  }
-
-  font-weight: 600;
-
-}
-
-$dark: #3D5A80;
-$medium: #98C1D9;
-$light: #E0FBFC;
-$call: #EE6C4D;
-$darkest: #293241;
-
-
+@use './styles/mixins.scss' as *;
 
 * {
   padding: 0;
@@ -39,25 +11,16 @@ $darkest: #293241;
 :link,
 :visited {
   color: $darkest;
-
 }
 
 li {
   list-style: none;
 }
 
-.container {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  max-width: 1200px;
-  height: 100%;
-}
-
 html,
 body,
-#root {
+#root,
+main {
   @include center();
   flex-direction: column;
   width: 100%;

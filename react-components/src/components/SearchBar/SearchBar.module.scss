@@ -1,13 +1,13 @@
-@use '../../App.scss' as *;
+@use '../../styles/mixins.scss' as *;
 
 .search {
-    border: 4px dotted $call;
-    padding: 10px;
-    border-radius: 20px;
-    width: 400px;
+  border: 4px dotted $call;
+  padding: 10px;
+  border-radius: 20px;
+  width: 400px;
 
-    &:focus {
-        outline: none;
-        border-color: $darkest;
-    }
+  &:focus {
+    outline: none;
+    border-color: $darkest;
+  }
 }
