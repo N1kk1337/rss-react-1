@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 class Header extends React.Component {
@@ -25,14 +25,14 @@ class Header extends React.Component {
         <nav>
           <ul className={styles['header__nav']}>
             <li className={styles['nav__item']}>
-              <Link className={styles['nav__btn']} to={'/'}>
+              <NavLink className={styles['nav__btn']} to={'/'}>
                 Main
-              </Link>
+              </NavLink>
             </li>
             <li className={styles['nav__item']}>
-              <Link className={styles['nav__btn']} to={'/about'}>
+              <NavLink className={styles['nav__btn']} to={'/about'}>
                 About Us
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </nav>

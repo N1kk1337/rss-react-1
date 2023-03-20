@@ -13,16 +13,16 @@ export interface CardProps {
 }
 
 class Card extends React.Component<CardProps> {
+  handleLike = () => {
+    alert('Do you like this cat? He likes you too!');
+  };
+
+  handleShare = () => {
+    navigator.clipboard.writeText(this.props.img);
+    alert('URL copied to clipboard :3');
+  };
+
   render() {
-    const handleLike = () => {
-      alert('Do you like this cat? He likes you too!');
-    };
-
-    const handleShare = () => {
-      navigator.clipboard.writeText(this.props.img);
-      alert('URL copied to clipboard :3');
-    };
-
     return (
       <div data-testid="card" className={styles.card}>
         <img data-testid={this.props.id} className={styles.card__img} src={this.props.img} alt="" />
@@ -47,8 +47,8 @@ class Card extends React.Component<CardProps> {
           </li>
         </ul>
         <div className={styles.card__footer}>
-          <button onClick={handleLike}>Like ❤️</button>
-          <button onClick={handleShare}>Share 🔗</button>
+          <button onClick={this.handleLike}>Like ❤️</button>
+          <button onClick={this.handleShare}>Share 🔗</button>
           <a href={this.props.wiki}>Breed Info</a>
         </div>
       </div>

@@ -10,16 +10,16 @@ class CardList extends React.Component {
     return (
       <div className={styles.list}>
         {list &&
-          list.map((n) => (
+          list.map((cat) => (
             <Card
-              img={n.url}
-              breed={n.breeds[0].name}
-              wiki={n.breeds[0].wikipedia_url}
-              temperament={n.breeds[0].temperament}
-              sheddingLevel={n.breeds[0].shedding_level}
-              friendly={n.breeds[0].stranger_friendly}
-              id={n.id}
-              key={n.id}
+              img={cat.url}
+              breed={cat.breeds[0].name}
+              wiki={cat.breeds[0].wikipedia_url}
+              temperament={cat.breeds[0].temperament}
+              sheddingLevel={cat.breeds[0].shedding_level}
+              friendly={cat.breeds[0].stranger_friendly}
+              id={cat.id}
+              key={cat.id}
             />
           ))}
       </div>
