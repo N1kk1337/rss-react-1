@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './Card.module.scss';
 
 export interface CardProps {
+  id: string;
   img: string;
   breed: string;
   wiki: string;
@@ -23,8 +24,8 @@ class Card extends React.Component<CardProps> {
     };
 
     return (
-      <div className={styles.card}>
-        <img className={styles.card__img} src={this.props.img} alt="" />
+      <div data-testid="card" className={styles.card}>
+        <img data-testid={this.props.id} className={styles.card__img} src={this.props.img} alt="" />
         <ul className={styles.card__stats}>
           <li>
             <p>

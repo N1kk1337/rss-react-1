@@ -18,6 +18,7 @@ class CardList extends React.Component {
               temperament={n.breeds[0].temperament}
               sheddingLevel={n.breeds[0].shedding_level}
               friendly={n.breeds[0].stranger_friendly}
+              id={n.id}
               key={n.id}
             />
           ))}
