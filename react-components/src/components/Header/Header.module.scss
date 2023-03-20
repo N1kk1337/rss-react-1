@@ -13,6 +13,12 @@
 
 .nav__btn {
   @include basic-btn();
+
+
+}
+
+a.active {
+  background-color: $light;
 }
 
 .header__nav {
