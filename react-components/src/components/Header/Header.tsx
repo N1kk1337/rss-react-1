@@ -8,7 +8,6 @@ class Header extends React.Component {
     // So, instead of putting Header in to the App.tsx, I decided to put it in every page separately, to implement
     // location.pathname
     let path = '';
-    console.log(location.hash)
     switch (location.hash) {
       case '#/':
         path = 'Main Page';

@@ -11,12 +11,15 @@ export interface CardProps {
   temperament: string;
 }
 
-export interface CardState {}
-
-class Card extends React.Component<CardProps, CardState> {
+class Card extends React.Component<CardProps> {
   render() {
     const handleLike = () => {
       alert('Do you like this cat? He likes you too!');
+    };
+
+    const handleShare = () => {
+      navigator.clipboard.writeText(this.props.img);
+      alert('URL copied to clipboard :3');
     };
 
     return (
@@ -44,13 +47,7 @@ class Card extends React.Component<CardProps, CardState> {
         </ul>
         <div className={styles.card__footer}>
           <button onClick={handleLike}>Like ❤️</button>
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(this.props.img);
-            }}
-          >
-            Share 🔗
-          </button>
+          <button onClick={handleShare}>Share 🔗</button>
           <a href={this.props.wiki}>Breed Info</a>
         </div>
       </div>

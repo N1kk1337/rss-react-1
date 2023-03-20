@@ -4,11 +4,7 @@ import styles from './MainPage.module.scss';
 import CardList from '../../components/CardList/CardList';
 import Header from '../../components/Header/Header';
 
-export interface MainPageProps {}
-
-export interface MainPageState {}
-
-class MainPage extends React.PureComponent<MainPageProps, MainPageState> {
+class MainPage extends React.Component {
   // state = { : }
   render() {
     return (

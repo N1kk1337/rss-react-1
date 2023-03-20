@@ -2,27 +2,22 @@ import Header from '../../components/Header/Header';
 import React from 'react';
 import styles from './AboutPage.module.scss';
 
-export interface AboutPageProps {}
-
-export interface AboutPageState {}
-
-class AboutPage extends React.PureComponent<AboutPageProps, AboutPageState> {
-  // state = { :  }
+class AboutPage extends React.Component {
   render() {
     return (
       <main>
         <Header />
         <div className={styles['about-page']}>
           <p>
-            Welcome to our site, where we celebrate everything feline! We're a group of passionate
-            cat lovers who believe that cats are more than just pets – they're beloved members of
+            Welcome to our site, where we celebrate everything feline! We are a group of passionate
+            cat lovers who believe that cats are more than just pets – they are beloved members of
             our families, each with their own unique personality, quirks, and charms.
           </p>
           <p>
             Our site is dedicated to all things cat-related, from tips on cat care and nutrition to
-            fun facts about cat behavior and the latest cat-related news and trends. Whether you're
-            a lifelong cat owner or are considering adopting a cat for the first time, we're here to
-            provide you with the information and resources you need to give your furry friend the
+            fun facts about cat behavior and the latest cat-related news and trends. Whether you are
+            a lifelong cat owner or are considering adopting a cat for the first time, we are here
+            to provide you with the information and resources you need to give your furry friend the
             best possible care and love.
           </p>
           <p>
@@ -33,8 +28,8 @@ class AboutPage extends React.PureComponent<AboutPageProps, AboutPageState> {
           </p>
           <p>
             Our team is made up of cat enthusiasts from all walks of life, from seasoned
-            veterinarians and cat behaviorists to dedicated volunteers and everyday cat lovers.
-            We're passionate about cats and about sharing our knowledge and love of these amazing
+            veterinarians and cat behaviorists to dedicated volunteers and everyday cat lovers. We
+            are passionate about cats and about sharing our knowledge and love of these amazing
             animals with others.
           </p>
           <p>
