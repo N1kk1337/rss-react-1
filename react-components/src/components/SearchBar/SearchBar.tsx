@@ -6,7 +6,7 @@ interface SearchBarState {
 }
 
 interface SearchBarProps {
-  object: object;
+  object?: object;
 }
 
 class SearchBar extends React.Component<SearchBarProps, SearchBarState> {

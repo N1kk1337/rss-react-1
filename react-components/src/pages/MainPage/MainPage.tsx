@@ -11,8 +11,8 @@ class MainPage extends React.Component {
       <main>
         <Header />
         <div className={styles['main-page']}>
-          <SearchBar></SearchBar>
-          <CardList></CardList>
+          <SearchBar />
+          <CardList />
         </div>
       </main>
     );
