@@ -9,6 +9,7 @@ class Header extends React.Component {
     // location.pathname
     let path = '';
     switch (location.hash) {
+      case '':
       case '#/':
         path = 'Main Page';
         break;
