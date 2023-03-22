@@ -1,0 +1,55 @@
+@use '../../styles/mixins.scss' as *;
+
+.card {
+  width: 250px;
+  background-color: $medium;
+  box-shadow: 10px 10px $dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  &:hover {
+    margin-top: -6px;
+    margin-bottom: +6px;
+  }
+}
+
+.card__stats {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  & > :not(:last-child) {
+    border-bottom: 1px solid $dark;
+  }
+
+  & li p {
+    padding-bottom: 2px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.card__footer {
+  padding: 10px;
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+
+  & button,
+  a {
+    padding: 5px;
+    color: $light;
+    border-radius: 8px;
+    background-color: $dark;
+    border: 0;
+    cursor: pointer;
+  }
+}

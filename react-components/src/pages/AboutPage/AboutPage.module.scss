@@ -1,0 +1,9 @@
+@use '../../styles/mixins.scss' as *;
+
+.about-page {
+  @include container;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
