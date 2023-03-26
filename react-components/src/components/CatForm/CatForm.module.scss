@@ -1,0 +1,12 @@
+@use '../../styles/mixins.scss' as *;
+
+.form {
+  margin-top: 20px;
+  padding: 10px;
+  @include center();
+  align-items: normal;
+  flex-direction: column;
+  background-color: $medium;
+  border-radius: 10px;
+  gap: 10px;
+}

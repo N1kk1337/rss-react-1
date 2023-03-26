@@ -6,7 +6,6 @@ class AboutPage extends React.Component {
   render() {
     return (
       <main>
-        <Header />
         <div className={styles['about-page']}>
           <p>
             Welcome to our site, where we celebrate everything feline! We are a group of passionate

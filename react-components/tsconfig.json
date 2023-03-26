@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["dom", "esnext", "dom.iterable"],
+    "lib": [
+      "dom",
+      "esnext",
+      "dom.iterable"
+    ],
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
@@ -13,7 +17,39 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": "./src",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@tests/*": [
+        "src/tests/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "@RadioSelector/*": [
+        "src/components/RadioSelector/*"
+      ]
+    }
   },
-  "include": ["./src/**/*", "styled.d.ts"]
+  "include": [
+    "./src/**/*",
+    "styled.d.ts"
+  ]
 }
