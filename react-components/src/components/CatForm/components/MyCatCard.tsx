@@ -2,21 +2,10 @@ import EmojiCounter from '../../EmojiCounter/EmojiCounter';
 import React from 'react';
 import { Component } from 'react';
 import styles from './MyCatCard.module.scss';
+import { MyCatModel } from './MyCatModel';
 
-export interface MyCatCardProps {
-  name: string;
-  gender: string;
-  breed: string;
-  fluffiness: number;
-  friendliness: number;
-  img: File | null;
-  birthDate: string;
-  bites: boolean;
-  description: string;
-}
-
-export default class MyCatCard extends Component<MyCatCardProps> {
-  constructor(props: MyCatCardProps) {
+export default class MyCatCard extends Component<MyCatModel> {
+  constructor(props: MyCatModel) {
     super(props);
   }
   render() {

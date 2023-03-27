@@ -4,6 +4,7 @@ import styles from './RadioSelector.module.scss';
 interface RadioSelectorProps {
   options: string[];
   name: string;
+  ref: React.ClassAttributes<HTMLSelectElement>;
 }
 interface RadioSelectorState {}
 
