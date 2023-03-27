@@ -128,19 +128,19 @@ export default class CatForm extends React.Component<CatFormProps, CatFormState>
   render() {
     return (
       <form onSubmit={this.handleSubmit} className={styles.form}>
-        <h1>Send me your cats!</h1>
-        <label htmlFor="name">
+        <h1 className={styles.header}>Send me your cats!</h1>
+        <label className={styles['form__single-field-input']} htmlFor="name">
           Name <input type="text" id="name" ref={this.nameInput} />
         </label>
         {this.state.errors.name && <p className={styles.error}>{this.state.errors.name}</p>}
-        <label htmlFor="birthDate">
+        <label className={styles['form__single-field-input']} htmlFor="birthDate">
           Birth Date
           <input type="date" id="birthDate" ref={this.birthDateInput} />
         </label>
         {this.state.errors.birthDate && (
           <p className={styles.error}>{this.state.errors.birthDate}</p>
         )}
-        <label htmlFor="breed">
+        <label className={styles['form__single-field-input']} htmlFor="breed">
           Breed{' '}
           <select id="breed" ref={this.breedInput}>
             {this.breeds &&
@@ -155,6 +155,7 @@ export default class CatForm extends React.Component<CatFormProps, CatFormState>
         {this.state.errors.breed && <p className={styles.error}>{this.state.errors.breed}</p>}
 
         <RadioSelector
+          className={styles['form__multi-field-input']}
           name="Fluffiness"
           options={['1', '2', '3', '4', '5']}
           setRef={(index, input) => {
@@ -162,6 +163,7 @@ export default class CatForm extends React.Component<CatFormProps, CatFormState>
           }}
         />
         <RadioSelector
+          className={styles['form__multi-field-input']}
           name="Friendliness"
           options={['1', '2', '3', '4', '5']}
           setRef={(index, input) => {
@@ -169,22 +171,25 @@ export default class CatForm extends React.Component<CatFormProps, CatFormState>
           }}
         />
         <RadioSelector
-          name="gender"
+          className={styles['form__multi-field-input']}
+          name="Sex"
           options={['Male', 'Female']}
           setRef={(index, input) => {
             if (input) this.genderInput.set(index, input);
           }}
         />
-        <label htmlFor="bites">
+        <label className={styles['form__checkbox']} htmlFor="bites">
           Does this cat bite? <input type="checkbox" name="bites" ref={this.bitesInput} />
         </label>
 
-        <label htmlFor="file">
+        <label className={styles['form__upload']} htmlFor="file">
           Upload cat pic! <input name="file" type="file" ref={this.imgInput} />
         </label>
 
-        <label htmlFor="description">Description</label>
-        <textarea id="description" ref={this.descriptionInput} />
+        <label className={styles['form__description']} htmlFor="description">
+          Description <textarea id="description" ref={this.descriptionInput} />
+        </label>
+
         {this.state.errors.description && (
           <p className={styles.error}>{this.state.errors.description}</p>
         )}

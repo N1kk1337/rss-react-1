@@ -4,15 +4,10 @@
   display: flex;
   flex-wrap: nowrap;
   gap: 5px;
-  padding: 8px;
-  background-color: $light;
-  border-radius: 10px;
+
   justify-content: space-between;
 
   & label {
-    padding: 4px;
-
-    border: 1px solid $call;
     border-radius: 10px;
   }
 

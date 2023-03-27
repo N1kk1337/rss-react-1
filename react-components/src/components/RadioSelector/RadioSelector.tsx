@@ -5,12 +5,13 @@ interface RadioSelectorProps {
   options: string[];
   name: string;
   setRef: (index: number, input: HTMLInputElement | null) => void;
+  className?: string;
 }
 
 export default class RadioSelector extends Component<RadioSelectorProps> {
   render() {
     return (
-      <div className={styles.radio}>
+      <div className={`${styles.radio} ${this.props.className ? this.props.className : ''} `}>
         <label>{this.props.name}</label>
         <div className={styles['radio-container']}>
           {this.props.options.map((option, index) => (
