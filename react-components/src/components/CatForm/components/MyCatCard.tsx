@@ -21,7 +21,7 @@ export default class MyCatCard extends Component<MyCatModel, MyCatCardState> {
       .then((dataUrl) => {
         this.setState({ imgSrc: dataUrl });
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({ imgSrc: placeholderCat });
       });
   }

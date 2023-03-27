@@ -130,19 +130,19 @@ export default class CatForm extends React.Component<CatFormProps, CatFormState>
       <form onSubmit={this.handleSubmit} className={styles.form}>
         <h1>Send me your cats!</h1>
         <label htmlFor="name">
-          Name <input type="text" name="name" ref={this.nameInput} />
+          Name <input type="text" id="name" ref={this.nameInput} />
         </label>
         {this.state.errors.name && <p className={styles.error}>{this.state.errors.name}</p>}
         <label htmlFor="birthDate">
           Birth Date
-          <input type="date" name="birthDate" ref={this.birthDateInput} />
+          <input type="date" id="birthDate" ref={this.birthDateInput} />
         </label>
         {this.state.errors.birthDate && (
           <p className={styles.error}>{this.state.errors.birthDate}</p>
         )}
         <label htmlFor="breed">
           Breed{' '}
-          <select name="breed" ref={this.breedInput}>
+          <select id="breed" ref={this.breedInput}>
             {this.breeds &&
               Array.from(this.breeds).map((breed: string) => (
                 <option key={breed} value={breed}>
@@ -184,7 +184,7 @@ export default class CatForm extends React.Component<CatFormProps, CatFormState>
         </label>
 
         <label htmlFor="description">Description</label>
-        <textarea name="description" ref={this.descriptionInput} />
+        <textarea id="description" ref={this.descriptionInput} />
         {this.state.errors.description && (
           <p className={styles.error}>{this.state.errors.description}</p>
         )}

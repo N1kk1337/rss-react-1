@@ -20,7 +20,8 @@ li {
 html,
 body,
 #root,
-main {
+main,
+.wrapper {
   @include center();
   flex-direction: column;
   width: 100%;
