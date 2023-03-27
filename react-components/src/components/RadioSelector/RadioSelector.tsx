@@ -4,11 +4,10 @@ import styles from './RadioSelector.module.scss';
 interface RadioSelectorProps {
   options: string[];
   name: string;
-  ref: React.ClassAttributes<HTMLSelectElement>;
+  setRef: (index: number, input: HTMLInputElement | null) => void;
 }
-interface RadioSelectorState {}
 
-export default class RadioSelector extends Component<RadioSelectorProps, RadioSelectorState> {
+export default class RadioSelector extends Component<RadioSelectorProps> {
   render() {
     return (
       <div className={styles.radio}>
@@ -16,7 +15,12 @@ export default class RadioSelector extends Component<RadioSelectorProps, RadioSe
         <div className={styles['radio-container']}>
           {this.props.options.map((option, index) => (
             <label key={option}>
-              <input defaultChecked={index ? true : false} type="radio" name={this.props.name} />
+              <input
+                defaultChecked={index === 0 ? true : false}
+                type="radio"
+                ref={(input) => this.props.setRef(index, input)}
+                name={this.props.name}
+              />
               {option}
             </label>
           ))}

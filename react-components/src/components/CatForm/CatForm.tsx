@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './CatForm.module.scss';
 import cats from '../../assets/cats_data.json';
 import RadioSelector from '../RadioSelector/RadioSelector';
-import MyCatCard, { MyCatCardProps } from './components/MyCatCard';
 import { MyCatModel } from './components/MyCatModel';
 
 interface State {
@@ -12,7 +11,7 @@ interface State {
 }
 
 interface Props {
-  onSubmit: (data: any) => void;
+  onSubmit: (data: MyCatModel) => void;
 }
 
 export default class CatForm extends React.Component<Props, State> {
@@ -21,9 +20,9 @@ export default class CatForm extends React.Component<Props, State> {
   private breedInput: React.RefObject<HTMLSelectElement>;
   private bitesInput: React.RefObject<HTMLInputElement>;
   private descriptionInput: React.RefObject<HTMLTextAreaElement>;
-  private friendlinessInput: React.RefObject<HTMLInputElement>;
-  private fluffinessInput: React.RefObject<HTMLInputElement>;
-  private genderInput: React.RefObject<HTMLSelectElement>;
+  private friendlinessInput: Map<number, HTMLInputElement>;
+  private fluffinessInput: Map<number, HTMLInputElement>;
+  private genderInput: Map<number, HTMLInputElement>;
   private imgInput: React.RefObject<HTMLInputElement>;
   constructor(props: Props | Readonly<Props>) {
     super(props);
@@ -32,9 +31,9 @@ export default class CatForm extends React.Component<Props, State> {
     this.breedInput = React.createRef();
     this.bitesInput = React.createRef();
     this.descriptionInput = React.createRef();
-    this.friendlinessInput = React.createRef();
-    this.fluffinessInput = React.createRef();
-    this.genderInput = React.createRef();
+    this.friendlinessInput = new Map();
+    this.fluffinessInput = new Map();
+    this.genderInput = new Map();
     this.imgInput = React.createRef();
 
     this.state = {
@@ -43,6 +42,14 @@ export default class CatForm extends React.Component<Props, State> {
   }
 
   breeds = new Set(cats.map((cat) => cat.breeds[0].name));
+
+  getSelectedRadioValue = (radioInputs: Map<number, HTMLInputElement>): number => {
+    let selectedValue = 0;
+    radioInputs.forEach((input, index) => {
+      if (input.checked) selectedValue = index;
+    });
+    return selectedValue + 1;
+  };
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -54,13 +61,10 @@ export default class CatForm extends React.Component<Props, State> {
         breed: this.breedInput.current!.value,
         bites: this.bitesInput.current!.checked,
         description: this.descriptionInput.current!.value,
-        friendliness: 2,
-        fluffiness: 3,
+        friendliness: this.getSelectedRadioValue(this.friendlinessInput),
+        fluffiness: this.getSelectedRadioValue(this.fluffinessInput),
         gender: true,
-        img: null,
-
-        // friendliness: this.friendlinessInput.current!.value,
-        // fluffiness: this.fluffinessInput.current!.value,
+        img: this.imgInput.current!.files && this.imgInput.current!.files[0],
       };
       this.props.onSubmit(newCat);
     }
@@ -73,7 +77,11 @@ export default class CatForm extends React.Component<Props, State> {
       errors.name = 'Name is required';
     }
 
-    if (!this.nameInput.current?.value || !this.nameInput.current.value.trim()[0].match(/[A-Z]/)) {
+    if (
+      !this.nameInput.current?.value ||
+      this.nameInput.current.value.trim()[0] ===
+        this.nameInput.current.value.trim()[0].toLowerCase()
+    ) {
       errors.name = 'Name must start with a capital letter';
     }
 
@@ -97,6 +105,7 @@ export default class CatForm extends React.Component<Props, State> {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className={styles.form}>
+        <h1>Send me your cats!</h1>
         <label htmlFor="name">
           Name <input type="text" name="name" ref={this.nameInput} />
         </label>
@@ -123,17 +132,32 @@ export default class CatForm extends React.Component<Props, State> {
         {this.state.errors.breed && <p className={styles.error}>{this.state.errors.breed}</p>}
 
         <RadioSelector
-          ref={this.fluffinessInput}
           name="Fluffiness"
           options={['1', '2', '3', '4', '5']}
+          setRef={(index, input) => {
+            if (input) this.fluffinessInput.set(index, input);
+          }}
         />
         <RadioSelector
-          ref={this.friendlinessInput}
           name="Friendliness"
           options={['1', '2', '3', '4', '5']}
+          setRef={(index, input) => {
+            if (input) this.friendlinessInput.set(index, input);
+          }}
+        />
+        <RadioSelector
+          name="gender"
+          options={['Male', 'Female']}
+          setRef={(index, input) => {
+            if (input) this.genderInput.set(index, input);
+          }}
         />
         <label htmlFor="bites">
           Does this cat bite? <input type="checkbox" name="bites" ref={this.bitesInput} />
+        </label>
+
+        <label htmlFor="file">
+          Upload cat pic! <input name="file" type="file" ref={this.imgInput} />
         </label>
 
         <label htmlFor="description">Description</label>

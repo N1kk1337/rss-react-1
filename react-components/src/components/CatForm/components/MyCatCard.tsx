@@ -3,23 +3,43 @@ import React from 'react';
 import { Component } from 'react';
 import styles from './MyCatCard.module.scss';
 import { MyCatModel } from './MyCatModel';
+import { fileToDataURL } from '../../../utils/utils';
 
-export default class MyCatCard extends Component<MyCatModel> {
+interface MyCatCardState {
+  imgSrc?: string;
+}
+
+export default class MyCatCard extends Component<MyCatModel, MyCatCardState> {
   constructor(props: MyCatModel) {
     super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    fileToDataURL(this.props.img)
+      .then((dataUrl) => {
+        this.setState({ imgSrc: dataUrl });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
   render() {
     return (
       <div className={styles['cat-card']}>
         <h2>{this.props.name}</h2>
-        {/* <img src={this.props.img} alt={this.props.name} /> */}
-        <p>{this.props.breed}</p>
-        <p>{this.props.gender}</p>
-        <p>{this.props.birthDate}</p>
-        <EmojiCounter emoji="🐱" count={this.props.fluffiness} />
-        <EmojiCounter emoji="🐱" count={this.props.friendliness} />
-        <p>{this.props.bites}</p>
-        <p>{this.props.description}</p>
+        {this.state.imgSrc && <img src={this.state.imgSrc} alt={this.props.name} />}
+        <p>Breed: {this.props.breed}</p>
+        <p>Sex: {this.props.gender ? 'Male' : 'Female'}</p>
+        <p>Birthday: {this.props.birthDate}</p>
+        <p>
+          Fluffiness: <EmojiCounter emoji="🐱" count={this.props.fluffiness} />
+        </p>
+        <p>
+          Friendliness: <EmojiCounter emoji="❤️" count={this.props.friendliness} />
+        </p>
+        <p>Bites? {this.props.bites ? 'Yes!' : 'No!'}</p>
+        <p>Description: {this.props.description}</p>
       </div>
     );
   }
