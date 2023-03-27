@@ -4,17 +4,18 @@ import cats from '../../assets/cats_data.json';
 import RadioSelector from '../RadioSelector/RadioSelector';
 import { MyCatModel } from './components/MyCatModel';
 
-interface State {
+interface CatFormState {
   errors: {
     [key: string]: string;
   };
+  dataSavedMessage: boolean;
 }
 
-interface Props {
+interface CatFormProps {
   onSubmit: (data: MyCatModel) => void;
 }
 
-export default class CatForm extends React.Component<Props, State> {
+export default class CatForm extends React.Component<CatFormProps, CatFormState> {
   private nameInput: React.RefObject<HTMLInputElement>;
   private birthDateInput: React.RefObject<HTMLInputElement>;
   private breedInput: React.RefObject<HTMLSelectElement>;
@@ -24,7 +25,7 @@ export default class CatForm extends React.Component<Props, State> {
   private fluffinessInput: Map<number, HTMLInputElement>;
   private genderInput: Map<number, HTMLInputElement>;
   private imgInput: React.RefObject<HTMLInputElement>;
-  constructor(props: Props | Readonly<Props>) {
+  constructor(props: CatFormProps | Readonly<CatFormProps>) {
     super(props);
     this.nameInput = React.createRef();
     this.birthDateInput = React.createRef();
@@ -38,10 +39,28 @@ export default class CatForm extends React.Component<Props, State> {
 
     this.state = {
       errors: {},
+      dataSavedMessage: false,
     };
   }
 
   breeds = new Set(cats.map((cat) => cat.breeds[0].name));
+
+  clearForm = () => {
+    this.nameInput.current!.value = '';
+    this.birthDateInput.current!.value = '';
+    this.breedInput.current!.value = Array.from(this.breeds)[0];
+    this.bitesInput.current!.checked = false;
+    this.descriptionInput.current!.value = '';
+    this.friendlinessInput.forEach((input, index) =>
+      index === 0 ? (input.checked = true) : (input.checked = false)
+    );
+    this.fluffinessInput.forEach((input, index) =>
+      index === 0 ? (input.checked = true) : (input.checked = false)
+    );
+    this.imgInput.current!.value = '';
+
+    this.setState({ errors: {} });
+  };
 
   getSelectedRadioValue = (radioInputs: Map<number, HTMLInputElement>): number => {
     let selectedValue = 0;
@@ -67,6 +86,10 @@ export default class CatForm extends React.Component<Props, State> {
         img: this.imgInput.current!.files && this.imgInput.current!.files[0],
       };
       this.props.onSubmit(newCat);
+      this.setState({ dataSavedMessage: true });
+      this.clearForm();
+    } else {
+      this.setState({ dataSavedMessage: false });
     }
   };
 
@@ -167,6 +190,8 @@ export default class CatForm extends React.Component<Props, State> {
         )}
 
         <button type="submit">Submit</button>
+
+        {this.state.dataSavedMessage && <p>I got your cat!</p>}
       </form>
     );
   }

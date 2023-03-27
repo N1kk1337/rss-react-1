@@ -24,21 +24,26 @@ export default class FormsPage extends Component<FormPageProps, FormsPageState> 
     return (
       <div>
         <CatForm onSubmit={this.handleSubmit} />
-        {this.state.data &&
-          this.state.data.map((cat, index) => (
-            <MyCatCard
-              key={index}
-              name={cat.name}
-              gender={cat.gender}
-              breed={cat.breed}
-              fluffiness={cat.fluffiness}
-              friendliness={cat.friendliness}
-              img={cat.img}
-              birthDate={cat.birthDate}
-              bites={cat.bites}
-              description={cat.description}
-            />
-          ))}
+        <div className={styles['cat-cards']}>
+          {this.state.data ? (
+            this.state.data.map((cat, index) => (
+              <MyCatCard
+                key={index}
+                name={cat.name}
+                gender={cat.gender}
+                breed={cat.breed}
+                fluffiness={cat.fluffiness}
+                friendliness={cat.friendliness}
+                img={cat.img}
+                birthDate={cat.birthDate}
+                bites={cat.bites}
+                description={cat.description}
+              />
+            ))
+          ) : (
+            <div>No cats yet!</div>
+          )}
+        </div>
       </div>
     );
   }

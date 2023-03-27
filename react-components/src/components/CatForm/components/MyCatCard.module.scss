@@ -10,19 +10,20 @@
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
+  width: 300px;
 
   & h2 {
+  }
+  & img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    max-width: 300px;
+    border-radius: 10px;
   }
 
   &:hover {
     transform: scale(1.05);
-
-    & img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      border-radius: 10px;
-    }
 
     & button {
       @include basic-btn();
@@ -32,7 +33,5 @@
         color: $light;
       }
     }
-
-    
   }
 }

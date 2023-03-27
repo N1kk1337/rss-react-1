@@ -4,6 +4,7 @@ import { Component } from 'react';
 import styles from './MyCatCard.module.scss';
 import { MyCatModel } from './MyCatModel';
 import { fileToDataURL } from '../../../utils/utils';
+import placeholderCat from '../../../assets/placeholder_cat.jpg';
 
 interface MyCatCardState {
   imgSrc?: string;
@@ -21,7 +22,7 @@ export default class MyCatCard extends Component<MyCatModel, MyCatCardState> {
         this.setState({ imgSrc: dataUrl });
       })
       .catch((error) => {
-        console.error(error);
+        this.setState({ imgSrc: placeholderCat });
       });
   }
   render() {
