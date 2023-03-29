@@ -58,6 +58,9 @@ export default class CatForm extends React.Component<CatFormProps, CatFormState>
       index === 0 ? (input.checked = true) : (input.checked = false)
     );
     this.imgInput.current!.value = '';
+    this.genderInput.forEach((input, index) =>
+      index === 0 ? (input.checked = true) : (input.checked = false)
+    );
 
     this.setState({ errors: {} });
   };
@@ -82,7 +85,7 @@ export default class CatForm extends React.Component<CatFormProps, CatFormState>
         description: this.descriptionInput.current!.value,
         friendliness: this.getSelectedRadioValue(this.friendlinessInput),
         fluffiness: this.getSelectedRadioValue(this.fluffinessInput),
-        gender: true,
+        gender: this.getSelectedRadioValue(this.genderInput) === 2 ? false : true,
         img: this.imgInput.current!.files && this.imgInput.current!.files[0],
       };
       this.props.onSubmit(newCat);
