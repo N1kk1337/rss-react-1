@@ -1,4 +1,3 @@
-import Header from '../../components/Header/Header';
 import React from 'react';
 import styles from './AboutPage.module.scss';
 
@@ -6,7 +5,6 @@ class AboutPage extends React.Component {
   render() {
     return (
       <main>
-        <Header />
         <div className={styles['about-page']}>
           <p>
             Welcome to our site, where we celebrate everything feline! We are a group of passionate

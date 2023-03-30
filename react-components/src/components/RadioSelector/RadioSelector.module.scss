@@ -1,0 +1,22 @@
+@use '../../styles/mixins.scss' as *;
+
+.radio {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px;
+
+  justify-content: space-between;
+
+  & label {
+    border-radius: 10px;
+  }
+
+  & input {
+    margin-right: 4px;
+  }
+}
+.radio-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+}
