@@ -4,7 +4,7 @@ export interface MyCatModel {
   breed: string;
   fluffiness: number;
   friendliness: number;
-  img: File | null;
+  img: FileList | null;
   birthDate: string;
   bites: boolean;
   description: string;

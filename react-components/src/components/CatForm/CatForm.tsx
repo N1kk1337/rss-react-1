@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './CatForm.module.scss';
 import cats from '../../assets/cats_data.json';
 import RadioSelector from '../RadioSelector/RadioSelector';
@@ -14,40 +14,13 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
     register,
     handleSubmit,
     reset,
-    setError,
-    clearErrors,
     formState: { errors },
   } = useForm<MyCatModel>({
     mode: 'onSubmit',
-    defaultValues: {
-      name: '',
-      birthDate: '',
-      breed: '',
-      bites: false,
-      description: '',
-      friendliness: 1,
-      fluffiness: 1,
-      gender: true,
-      img: null,
-    },
   });
 
   const [dataSavedMessage, setDataSavedMessage] = useState(false);
   const breeds = new Set(cats.map((cat) => cat.breeds[0].name));
-
-  const clearForm = () => {
-    reset({
-      name: '',
-      birthDate: '',
-      breed: Array.from(breeds)[0],
-      bites: false,
-      description: '',
-      friendliness: 1,
-      fluffiness: 1,
-      gender: true,
-      img: null,
-    });
-  };
 
   const validateName = (value: string) => {
     if (!value || value.trim() === '') {
@@ -59,10 +32,10 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
     }
   };
 
-  const onFormSubmit = (data: MyCatModel) => {
-    onSubmit(data);
+  const onFormSubmit: SubmitHandler<MyCatModel> = async (data) => {
+    await onSubmit(data);
     setDataSavedMessage(true);
-    clearForm();
+    reset();
   };
 
   return (
@@ -127,8 +100,8 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
         Does this cat bite? <input {...register('bites')} type="checkbox" name="bites" />
       </label>
 
-      <label className={styles['form__upload']} htmlFor="file">
-        Upload cat pic! <input {...register('img')} name="file" type="file" />
+      <label className={styles['form__upload']} htmlFor="img">
+        Upload cat pic! <input type="file" {...register('img')} />
       </label>
 
       <label className={styles['form__description']} htmlFor="description">

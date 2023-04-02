@@ -1,4 +1,4 @@
-export const fileToDataURL = (file: File | null): Promise<string> => {
+export const fileToDataURL = (file: FileList | null): Promise<string> => {
   return new Promise((resolve, reject) => {
     if (!file) {
       reject('No file provided');
@@ -13,6 +13,6 @@ export const fileToDataURL = (file: File | null): Promise<string> => {
         reject('Failed to read file');
       }
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file.item(0)!);
   });
 };

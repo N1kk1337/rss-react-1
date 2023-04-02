@@ -28,8 +28,7 @@ const RadioSelector = ({
               defaultChecked={index === 0 ? true : false}
               type="radio"
               {...register(fieldName)}
-              name={fieldName}
-              value={option}
+              value={index + 1}
             />
             {option}
           </label>
