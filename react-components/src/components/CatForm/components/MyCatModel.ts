@@ -1,6 +1,6 @@
 export interface MyCatModel {
   name: string;
-  gender: boolean;
+  gender: string;
   breed: string;
   fluffiness: number;
   friendliness: number;

@@ -33,6 +33,7 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
   };
 
   const onFormSubmit: SubmitHandler<MyCatModel> = async (data) => {
+    console.log(data);
     await onSubmit(data);
     setDataSavedMessage(true);
     reset();

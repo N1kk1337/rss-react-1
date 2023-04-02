@@ -24,7 +24,7 @@ const MyCatCard: React.FC<MyCatModel> = (props) => {
       {imgSrc && <img src={imgSrc} alt={props.name} />}
       <div className={styles['info-container']}>
         <p>Breed: {props.breed}</p>
-        <p>Sex: {props.gender ? 'Male' : 'Female'}</p>
+        <p>Sex: {props.gender === '1' ? 'Male' : 'Female'}</p>
         <p>Birthday: {props.birthDate}</p>
         <p>
           Fluffiness: <EmojiCounter emoji="🐱" count={props.fluffiness} />
