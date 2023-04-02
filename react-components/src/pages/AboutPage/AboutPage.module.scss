@@ -2,8 +2,12 @@
 
 .about-page {
   @include container;
-
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  color: $light;
+  background-color: $darkest;
+  border: 2px solid $dark;
+  border-radius: 10px;
 }

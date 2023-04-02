@@ -1,32 +1,42 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Path, UseFormRegister } from 'react-hook-form';
 import styles from './RadioSelector.module.scss';
+import { MyCatModel } from 'components/CatForm/components/MyCatModel';
 
 interface RadioSelectorProps {
   options: string[];
   name: string;
-  setRef: (index: number, input: HTMLInputElement | null) => void;
+  fieldName: Path<MyCatModel>;
+  register: UseFormRegister<MyCatModel>;
   className?: string;
 }
 
-export default class RadioSelector extends Component<RadioSelectorProps> {
-  render() {
-    return (
-      <div className={`${styles.radio} ${this.props.className ? this.props.className : ''} `}>
-        <label>{this.props.name}</label>
-        <div className={styles['radio-container']}>
-          {this.props.options.map((option, index) => (
-            <label key={option}>
-              <input
-                defaultChecked={index === 0 ? true : false}
-                type="radio"
-                ref={(input) => this.props.setRef(index, input)}
-                name={this.props.name}
-              />
-              {option}
-            </label>
-          ))}
-        </div>
+const RadioSelector = ({
+  options,
+  name,
+  fieldName,
+  register,
+  className,
+}: RadioSelectorProps): React.ReactElement => {
+  return (
+    <div className={`${styles.radio} ${className ? className : ''}`}>
+      <label>{name}</label>
+      <div className={styles['radio-container']}>
+        {options.map((option, index) => (
+          <label key={option}>
+            <input
+              defaultChecked={index === 0 ? true : false}
+              type="radio"
+              {...register(fieldName)}
+              name={fieldName}
+              value={option}
+            />
+            {option}
+          </label>
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default RadioSelector;

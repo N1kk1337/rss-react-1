@@ -12,48 +12,54 @@ export interface CardProps {
   temperament: string;
 }
 
-class Card extends React.Component<CardProps> {
-  handleLike = () => {
+const Card: React.FC<CardProps> = ({
+  id,
+  img,
+  breed,
+  wiki,
+  sheddingLevel,
+  friendly,
+  temperament,
+}) => {
+  const handleLike = () => {
     alert('Do you like this cat? He likes you too!');
   };
 
-  handleShare = () => {
-    navigator.clipboard.writeText(this.props.img);
+  const handleShare = () => {
+    navigator.clipboard.writeText(img);
     alert('URL copied to clipboard :3');
   };
 
-  render() {
-    return (
-      <div data-testid="card" className={styles.card}>
-        <img data-testid={this.props.id} className={styles.card__img} src={this.props.img} alt="" />
-        <ul className={styles.card__stats}>
-          <li>
-            <p>
-              Breed: <span>{this.props.breed}</span>
-            </p>
-          </li>
-          <li>
-            <p>
-              Fluffiness: <EmojiCounter emoji="🐱" count={this.props.sheddingLevel} />
-            </p>
-          </li>
-          <li>
-            <p>
-              Cuteness: <EmojiCounter emoji="❤️" count={this.props.friendly} />
-            </p>
-          </li>
-          <li>
-            <p>Temperament: {this.props.temperament}</p>
-          </li>
-        </ul>
-        <div className={styles.card__footer}>
-          <button onClick={this.handleLike}>Like ❤️</button>
-          <button onClick={this.handleShare}>Share 🔗</button>
-          <a href={this.props.wiki}>Breed Info</a>
-        </div>
+  return (
+    <div data-testid="card" className={styles.card}>
+      <img data-testid={id} className={styles.card__img} src={img} alt="" />
+      <ul className={styles.card__stats}>
+        <li>
+          <p>
+            Breed: <span>{breed}</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            Fluffiness: <EmojiCounter emoji="🐱" count={sheddingLevel} />
+          </p>
+        </li>
+        <li>
+          <p>
+            Cuteness: <EmojiCounter emoji="❤️" count={friendly} />
+          </p>
+        </li>
+        <li>
+          <p>Temperament: {temperament}</p>
+        </li>
+      </ul>
+      <div className={styles.card__footer}>
+        <button onClick={handleLike}>Like ❤️</button>
+        <button onClick={handleShare}>Share 🔗</button>
+        <a href={wiki}>Breed Info</a>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Card;

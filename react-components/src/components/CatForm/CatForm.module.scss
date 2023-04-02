@@ -16,14 +16,15 @@
   &__header {
     align-text: center;
   }
-  margin-top: 20px;
   padding: 10px;
-  @include center();
+  @include center;
   align-items: normal;
   flex-direction: column;
   background-color: $medium;
   border-radius: 10px;
   gap: 10px;
+  max-width: 500px;
+  height: fit-content;
   &__single-field-input {
     display: flex;
     justify-content: space-between;
@@ -128,4 +129,15 @@
     background-color: $call;
     color: $darkest;
   }
+}
+
+.success {
+  width: 100%;
+  @include dark-selector;
+  font-weight: 900;
+  font-size: 20px;
+  height: auto;
+  background-color: $darkest;
+  color: $light;
+  justify-content: center;
 }

@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './NavBtn.module.scss';
 
@@ -14,15 +14,12 @@ interface ClassNameFuncProps {
 const classNameFunc = ({ isActive }: ClassNameFuncProps) =>
   isActive ? `${styles['nav__btn']} ${styles['active']}` : styles['nav__btn'];
 
-export default class NavBtn extends Component<NavBtnProps> {
-  constructor(props: NavBtnProps) {
-    super(props);
-  }
-  render() {
-    return (
-      <NavLink className={classNameFunc} to={this.props.path}>
-        {this.props.children}
-      </NavLink>
-    );
-  }
-}
+const NavBtn: React.FC<NavBtnProps> = ({ path, children }) => {
+  return (
+    <NavLink className={classNameFunc} to={path}>
+      {children}
+    </NavLink>
+  );
+};
+
+export default NavBtn;

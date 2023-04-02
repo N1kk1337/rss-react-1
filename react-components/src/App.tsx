@@ -6,20 +6,21 @@ import MainPage from './pages/MainPage/MainPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import FormsPage from './pages/FormsPage/FormsPage';
 import Header from './components/Header/Header';
-class App extends React.Component {
-  render() {
-    return (
-      <div className="wrapper">
-        <Header />
+
+const App: React.FC = () => {
+  return (
+    <div className="wrapper">
+      <Header />
+      <main className="main">
         <Routes>
           <Route path="*" element={<ErrorPage />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/forms" element={<FormsPage />} />
         </Routes>
-      </div>
-    );
-  }
-}
+      </main>
+    </div>
+  );
+};
 
 export default App;

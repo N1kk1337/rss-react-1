@@ -12,7 +12,7 @@ test('shows error messages when required fields are empty', async () => {
 
   await userEvent.click(submitButton);
 
-  expect(screen.getByText(/Name must start with a capital letter/i)).toBeInTheDocument();
+  expect(screen.getByText(/Name is required/i)).toBeInTheDocument();
   expect(screen.getByText(/Birth date is required/i)).toBeInTheDocument();
   expect(screen.getByText(/Description is required/i)).toBeInTheDocument();
 });
@@ -44,6 +44,13 @@ test('calls onSubmit function when the form is filled correctly', async () => {
   fireEvent.change(nameInput, { target: { value: 'CatName' } });
   fireEvent.change(birthDateInput, { target: { value: '2022-01-01' } });
   fireEvent.change(descriptionInput, { target: { value: 'A cute cat.' } });
+
+  // Add interactions for other fields
+  const breedSelect = screen.getByLabelText(/breed/i);
+  fireEvent.change(breedSelect, { target: { value: 'Abyssinian' } });
+
+  const bitesCheckbox = screen.getByText(/does this cat bite/i);
+  fireEvent.click(bitesCheckbox);
 
   fireEvent.click(submitButton);
 

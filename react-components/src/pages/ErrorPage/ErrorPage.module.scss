@@ -1,6 +1,15 @@
 @use '../../styles/mixins.scss' as *;
 
-.error-image {
+.error__image {
   @include container;
-  max-width: 80%;
+  max-height: 60vh;
+}
+
+.error__header {
+}
+
+.error__return-btn {
+  @include basic-btn;
+  width: 250px;
+  font-size: 20px;
 }

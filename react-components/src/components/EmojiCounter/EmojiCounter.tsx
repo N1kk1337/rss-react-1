@@ -5,13 +5,9 @@ export interface EmojiCounterProps {
   count: number;
 }
 
-class EmojiCounter extends React.Component<EmojiCounterProps> {
-  render() {
-    const emojis = Array.from({ length: this.props.count }, (_, i) => (
-      <span key={i}>{this.props.emoji}</span>
-    ));
-    return <span>{emojis}</span>;
-  }
-}
+const EmojiCounter: React.FC<EmojiCounterProps> = ({ emoji, count }) => {
+  const emojis = Array.from({ length: count }, (_, i) => <span key={i}>{emoji}</span>);
+  return <span>{emojis}</span>;
+};
 
 export default EmojiCounter;
