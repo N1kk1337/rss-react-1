@@ -38,8 +38,12 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
     reset();
   };
 
+  const onError = () => {
+    setDataSavedMessage(false);
+  };
+
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className={styles.form}>
+    <form onSubmit={handleSubmit(onFormSubmit, onError)} className={styles.form}>
       <h1 className={styles.header}>Send me your cats!</h1>
       <label className={styles['form__single-field-input']} htmlFor="name">
         Name{' '}
