@@ -56,7 +56,7 @@ const CardList: React.FC<CardListProps> = (props) => {
 
   return (
     <div className={styles.list}>
-      {photos &&
+      {photos.length !== 0 ? (
         photos.map((photo) => (
           <Card
             key={photo.id}
@@ -65,7 +65,10 @@ const CardList: React.FC<CardListProps> = (props) => {
             title={photo.title}
             photographerName={photo.ownerName}
           />
-        ))}
+        ))
+      ) : (
+        <h1>Loading or bad search</h1>
+      )}
     </div>
   );
 };
