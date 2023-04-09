@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "vite-aliases": "^0.11.0"
+  }
+}

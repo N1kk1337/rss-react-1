@@ -1,0 +1,29 @@
+@use '../../styles/mixins.scss' as *;
+.cat-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-page {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+}
+
+.no-cats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & h2 {
+    font-size: 30px;
+    font-weight: 700px;
+    background-color: $darkest;
+    padding: 10px;
+    color: $light;
+    border-radius: 5px;
+  }
+}

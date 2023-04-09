@@ -1,0 +1,9 @@
+@use '../../styles/mixins.scss' as *;
+.nav__btn {
+  @include basic-btn();
+}
+
+.active {
+  background-color: $light;
+  cursor: default;
+}
