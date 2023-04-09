@@ -4,6 +4,10 @@ import styles from './CardList.module.scss';
 import axios from 'axios';
 import { API_BASE_URL, FLICKR_API_KEY } from '../../config/api';
 
+interface CardListProps {
+  searchValue: string;
+}
+
 interface Photo {
   id: string;
   server_id: string;
@@ -12,15 +16,18 @@ interface Photo {
   ownerName: string;
 }
 
-const CardList = () => {
+const CardList: React.FC<CardListProps> = (props) => {
   const [photos, setPhotos] = useState<Photo[]>([]);
 
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const response = await axios.get(
-          `${API_BASE_URL}?method=flickr.interestingness.getList&api_key=${FLICKR_API_KEY}&extras=owner_name&per_page=12&page=1&format=json&nojsoncallback=1`
-        );
+        let URL;
+        if (props.searchValue === '') {
+          URL = `${API_BASE_URL}?method=flickr.interestingness.getList&api_key=${FLICKR_API_KEY}&extras=owner_name&per_page=12&page=1&format=json&nojsoncallback=1`;
+        } else
+          URL = `${API_BASE_URL}?method=flickr.photos.search&api_key=${FLICKR_API_KEY}&text=${props.searchValue}&extras=owner_name&per_page=12&page=1&format=json&nojsoncallback=1`;
+        const response = await axios.get(URL);
         console.log(response);
         const photos = response.data.photos.photo.map(
           (photo: {
@@ -45,7 +52,7 @@ const CardList = () => {
       }
     };
     fetchPhotos();
-  }, []);
+  }, [props.searchValue]);
 
   return (
     <div className={styles.list}>

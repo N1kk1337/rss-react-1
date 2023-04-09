@@ -16,13 +16,11 @@ const Card: React.FC<CardProps> = ({ id, img, title, photographerName }) => {
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     setShowModal(true);
-    console.log('show');
   };
 
   const handleCloseModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     setShowModal(false);
-    console.log('hide');
   };
 
   const cardModal = <Modal id={id} onClose={(e) => handleCloseModal(e)} />;

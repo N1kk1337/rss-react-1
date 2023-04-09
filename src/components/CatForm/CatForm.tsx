@@ -33,7 +33,6 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
   };
 
   const onFormSubmit: SubmitHandler<MyCatModel> = async (data) => {
-    console.log(data);
     await onSubmit(data);
     setDataSavedMessage(true);
     reset();
@@ -44,10 +43,14 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit, onError)} className={styles.form}>
+    <form
+      data-testid="cat-form"
+      onSubmit={handleSubmit(onFormSubmit, onError)}
+      className={styles.form}
+    >
       <h1 className={styles.header}>Send me your cats!</h1>
       <label className={styles['form__single-field-input']} htmlFor="name">
-        Name{' '}
+        Name:{' '}
         <input
           {...register('name', {
             validate: validateName,
@@ -59,7 +62,7 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
       </label>
       {errors.name && <p className={styles.error}>{errors.name.message}</p>}
       <label className={styles['form__single-field-input']} htmlFor="birthDate">
-        Birth Date
+        Birth Date:
         <input
           {...register('birthDate', { required: 'Birth Date is required' })}
           type="date"

@@ -50,7 +50,7 @@ const ModalCard: React.FC<ModalCardProps> = ({ id, onClose }) => {
     <div className={`${styles.modal} ${styles.show}`} onClick={onClose}>
       {photoDetails ? (
         <div onClick={(e) => e.stopPropagation()} className={styles.modalContent}>
-          <span className={styles.close} onClick={onClose}>
+          <span data-testid="modal-close" className={styles.close} onClick={onClose}>
             &times;
           </span>
           <img
@@ -69,6 +69,9 @@ const ModalCard: React.FC<ModalCardProps> = ({ id, onClose }) => {
         </div>
       ) : (
         <div onClick={(e) => e.stopPropagation()} className={styles.modalContent}>
+          <span data-testid="modal-close" className={styles.close} onClick={onClose}>
+            &times;
+          </span>
           Loading...
         </div>
       )}

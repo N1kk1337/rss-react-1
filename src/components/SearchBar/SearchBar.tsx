@@ -1,27 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './SearchBar.module.scss';
 
-const SearchBar: React.FC = () => {
-  const [searchValue, setSearchValue] = useState<string>(
-    JSON.parse(localStorage.getItem('searchValue')!) || ''
-  );
+export interface SearchBarProps {
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  onSearch: () => void;
+}
 
-  useEffect(() => {
-    localStorage.setItem('searchValue', JSON.stringify(searchValue));
-  }, [searchValue]);
+const SearchBar: React.FC<SearchBarProps> = ({ searchValue, setSearchValue, onSearch }) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onSearch();
+    }
+  };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+  const handleClick = () => {
+    onSearch();
   };
 
   return (
-    <input
-      value={searchValue}
-      onChange={handleChange}
-      className={styles.search}
-      type="search"
-      placeholder="Everybody's looking for something"
-    />
+    <div className={styles.searchBar}>
+      <input
+        value={searchValue}
+        onChange={(event) => setSearchValue(event.target.value)}
+        onKeyUp={handleKeyPress}
+        className={styles.searchInput}
+        type="search"
+        placeholder="Everybody's looking for something"
+      />
+      <button onClick={handleClick} className={styles.searchButton}>
+        Search
+      </button>
+    </div>
   );
 };
 
