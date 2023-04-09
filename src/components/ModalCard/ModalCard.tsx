@@ -36,7 +36,6 @@ const ModalCard: React.FC<ModalCardProps> = ({ id, onClose }) => {
           `${API_BASE_URL}?method=flickr.photos.getInfo&api_key=${FLICKR_API_KEY}&photo_id=${id}&format=json&nojsoncallback=1`
         );
         const details = response.data.photo;
-        console.log(details);
         setPhotoDetails(details);
       } catch (error) {
         console.error(error);

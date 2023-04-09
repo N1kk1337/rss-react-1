@@ -28,7 +28,6 @@ const CardList: React.FC<CardListProps> = (props) => {
         } else
           URL = `${API_BASE_URL}?method=flickr.photos.search&api_key=${FLICKR_API_KEY}&text=${props.searchValue}&extras=owner_name&per_page=12&page=1&format=json&nojsoncallback=1`;
         const response = await axios.get(URL);
-        console.log(response);
         const photos = response.data.photos.photo.map(
           (photo: {
             id: string;
