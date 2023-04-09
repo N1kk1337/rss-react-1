@@ -1,63 +1,48 @@
-import EmojiCounter from '../EmojiCounter/EmojiCounter';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Card.module.scss';
+import { createPortal } from 'react-dom';
+import Modal from '../ModalCard/ModalCard';
 
 export interface CardProps {
   id: string;
   img: string;
-  breed: string;
-  wiki: string;
-  sheddingLevel: number;
-  friendly: number;
-  temperament: string;
+  title: string;
+  photographerName: string;
 }
 
-const Card: React.FC<CardProps> = ({
-  id,
-  img,
-  breed,
-  wiki,
-  sheddingLevel,
-  friendly,
-  temperament,
-}) => {
-  const handleLike = () => {
-    alert('Do you like this cat? He likes you too!');
+const Card: React.FC<CardProps> = ({ id, img, title, photographerName }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    setShowModal(true);
+    console.log('show');
   };
 
-  const handleShare = () => {
-    navigator.clipboard.writeText(img);
-    alert('URL copied to clipboard :3');
+  const handleCloseModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    setShowModal(false);
+    console.log('hide');
   };
+
+  const cardModal = <Modal id={id} onClose={(e) => handleCloseModal(e)} />;
 
   return (
-    <div data-testid="card" className={styles.card}>
-      <img data-testid={id} className={styles.card__img} src={img} alt="" />
+    <div data-testid="card" className={styles.card} onClick={(e) => handleClick(e)}>
+      <img data-testid={id} className={styles.card__img} src={img} alt={title} />
       <ul className={styles.card__stats}>
         <li>
           <p>
-            Breed: <span>{breed}</span>
+            <span>{title}</span>
           </p>
         </li>
         <li>
           <p>
-            Fluffiness: <EmojiCounter emoji="🐱" count={sheddingLevel} />
+            <span>By: {photographerName}</span>
           </p>
-        </li>
-        <li>
-          <p>
-            Cuteness: <EmojiCounter emoji="❤️" count={friendly} />
-          </p>
-        </li>
-        <li>
-          <p>Temperament: {temperament}</p>
         </li>
       </ul>
-      <div className={styles.card__footer}>
-        <button onClick={handleLike}>Like ❤️</button>
-        <button onClick={handleShare}>Share 🔗</button>
-        <a href={wiki}>Breed Info</a>
-      </div>
+      {showModal && createPortal(cardModal, document.body)}
     </div>
   );
 };
