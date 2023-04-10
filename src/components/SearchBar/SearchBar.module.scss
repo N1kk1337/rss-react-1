@@ -1,13 +1,29 @@
 @use '../../styles/mixins.scss' as *;
 
-.search {
-  border: 4px dotted $call;
-  padding: 10px;
-  border-radius: 20px;
+.search-bar {
+  border: 4px solid $dark;
   width: 400px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
 
-  &:focus {
-    outline: none;
-    border-color: $darkest;
+  & input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  & button {
+    border: none;
+    background-color: $call;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: pointer;
+    color: $darkest;
+    font-weight: 600;
   }
 }

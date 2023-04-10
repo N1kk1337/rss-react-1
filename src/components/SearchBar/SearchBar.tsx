@@ -19,18 +19,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchValue, setSearchValue, onSe
   };
 
   return (
-    <div className={styles.searchBar}>
+    <div className={styles['search-bar']}>
       <input
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}
         onKeyUp={handleKeyPress}
-        className={styles.searchInput}
         type="search"
         placeholder="Everybody's looking for something"
       />
-      <button onClick={handleClick} className={styles.searchButton}>
-        Search
-      </button>
+      <button onClick={handleClick}>Search</button>
     </div>
   );
 };
