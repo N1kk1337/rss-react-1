@@ -49,22 +49,28 @@ const ModalCard: React.FC<ModalCardProps> = ({ id, onClose }) => {
     <div className={`${styles.modal} ${styles.show}`} onClick={onClose}>
       {photoDetails ? (
         <div onClick={(e) => e.stopPropagation()} className={styles.modalContent}>
-          <span data-testid="modal-close" className={styles.close} onClick={onClose}>
-            &times;
-          </span>
-          <img
-            src={getPhotoFromId(photoDetails.server, photoDetails.id, photoDetails.secret)}
-            alt={photoDetails.title._content}
-          />
-          <h2>{photoDetails.title._content}</h2>
-          <p className={styles.photographer}>Photographer: {photoDetails.owner.realname}</p>
-          {photoDetails && (
-            <>
-              <p className={styles.description}>Description: {photoDetails.description._content}</p>
-              <p className={styles.taken}>Taken: {photoDetails.dates.taken}</p>
-            </>
-          )}
-          <p>ID: {photoDetails.id}</p>
+          <div className={styles['modal-header']}>
+            <h2>{photoDetails.title._content}</h2>
+            <div data-testid="modal-close" className={styles.close} onClick={onClose}>
+              &times;
+            </div>
+          </div>
+
+          <div className={styles['modal-body']}>
+            <img
+              src={getPhotoFromId(photoDetails.server, photoDetails.id, photoDetails.secret)}
+              alt={photoDetails.title._content}
+            />
+          </div>
+          <div className={styles.info}>
+            <p className={styles.photographer}>Photographer: {photoDetails.owner.realname}</p>
+            <p className={styles.description}>
+              Description:{' '}
+              <span dangerouslySetInnerHTML={{ __html: photoDetails.description._content }}></span>
+            </p>
+            <p className={styles.taken}>Taken: {photoDetails.dates.taken}</p>
+            <p>ID: {photoDetails.id}</p>
+          </div>
         </div>
       ) : (
         <div onClick={(e) => e.stopPropagation()} className={styles.modalContent}>
