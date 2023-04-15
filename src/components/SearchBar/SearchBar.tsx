@@ -3,7 +3,7 @@ import styles from './SearchBar.module.scss';
 
 export interface SearchBarProps {
   searchValue: string;
-  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  setSearchValue: (value: string) => void; // Update the type here
   onSearch: () => void;
 }
 

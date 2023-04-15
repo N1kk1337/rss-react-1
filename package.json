@@ -15,12 +15,14 @@
     "lintfix": "eslint . --ignore-path .gitignore --ignore-pattern node_modules/ --fix"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.3.5",
     "eslint-plugin-react-hooks": "^4.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
+    "react-redux": "^8.0.5",
     "react-router": "^6.8.2",
     "react-router-dom": "^6.8.2"
   },

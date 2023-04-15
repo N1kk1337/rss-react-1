@@ -45,6 +45,9 @@
       ],
       "@RadioSelector/*": [
         "src/components/RadioSelector/*"
+      ],
+      "@store/*": [
+        "src/store/*"
       ]
     }
   },
