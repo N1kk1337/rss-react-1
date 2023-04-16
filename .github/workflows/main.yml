@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - api
+      - redux
+      - ssr
 
 jobs:
   build:
