@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styles from './ModalCard.module.scss';
-import { API_BASE_URL, FLICKR_API_KEY, getPhotoFromId } from '../../config/api';
+import { getPhotoFromId } from '../../config/api';
 import { useFetchPhotoInfoQuery } from '../../store/services/flickrApi';
 
 interface ModalCardProps {
