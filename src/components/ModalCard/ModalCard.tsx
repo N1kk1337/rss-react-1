@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './ModalCard.module.scss';
 import { API_BASE_URL, FLICKR_API_KEY, getPhotoFromId } from '../../config/api';
+import { useFetchPhotoInfoQuery } from '../../store/services/flickrApi';
 
 interface ModalCardProps {
   id: string;
   onClose: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-interface PhotoDetails {
+export interface PhotoDetails {
   id: string;
   server: string;
   secret: string;
@@ -27,27 +28,11 @@ interface PhotoDetails {
 }
 
 const ModalCard: React.FC<ModalCardProps> = ({ id, onClose }) => {
-  const [photoDetails, setPhotoDetails] = useState<PhotoDetails | null>(null);
-
-  useEffect(() => {
-    const fetchPhotoDetails = async () => {
-      try {
-        const response = await axios.get(
-          `${API_BASE_URL}?method=flickr.photos.getInfo&api_key=${FLICKR_API_KEY}&photo_id=${id}&format=json&nojsoncallback=1`
-        );
-        const details = response.data.photo;
-        setPhotoDetails(details);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchPhotoDetails();
-  }, [id]);
+  const { data: photoDetails } = useFetchPhotoInfoQuery(id);
 
   return (
     <div className={`${styles.modal} ${styles.show}`} onClick={onClose}>
-      {photoDetails !== null ? (
+      {photoDetails !== undefined ? (
         <div onClick={(e) => e.stopPropagation()} className={styles.modal__content}>
           <div className={styles['modal-header']}>
             <h2>{photoDetails.title._content}</h2>
