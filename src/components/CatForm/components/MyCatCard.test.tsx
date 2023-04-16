@@ -12,17 +12,7 @@ const mockCat: MyCatModel = {
   friendliness: 3,
   bites: false,
   description: 'A very fluffy cat',
-  img: {
-    0: new File([''], 'placeholder_cat.jpg', { type: 'image/jpeg' }),
-    length: 1,
-    item: () => null,
-    [Symbol.iterator]: function* () {
-      let index = 0;
-      while (index < this.length) {
-        yield this[index++];
-      }
-    },
-  },
+  img: 'base64',
 };
 
 describe('MyCatCard', () => {

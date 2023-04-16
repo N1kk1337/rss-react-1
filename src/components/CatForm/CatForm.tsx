@@ -18,6 +18,7 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
   } = useForm<MyCatModel>({
     mode: 'onSubmit',
   });
+  const [img, setImg] = useState('');
 
   const [dataSavedMessage, setDataSavedMessage] = useState(false);
   const breeds = new Set(cats.map((cat) => cat.breeds[0].name));
@@ -33,13 +34,29 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
   };
 
   const onFormSubmit: SubmitHandler<MyCatModel> = async (data) => {
-    await onSubmit(data);
+    const dataWithImg = {
+      ...data,
+      img,
+    };
+    await onSubmit(dataWithImg);
     setDataSavedMessage(true);
     reset();
   };
 
   const onError = () => {
     setDataSavedMessage(false);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImg(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -109,7 +126,8 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
       </label>
 
       <label className={styles['form__upload']} htmlFor="img">
-        Upload cat pic! <input type="file" {...register('img')} />
+        Upload cat pic!{' '}
+        <input type="file" {...register('img')} onChange={handleFileChange} id="img" />
       </label>
 
       <label className={styles['form__description']} htmlFor="description">

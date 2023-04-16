@@ -2,11 +2,15 @@ import React from 'react';
 import { render, screen, userEvent } from '../src/utils/test-utils';
 import { HashRouter, MemoryRouter } from 'react-router-dom';
 import App from './App';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 const AppWrapper = () => (
-  <HashRouter>
-    <App />
-  </HashRouter>
+  <Provider store={store}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>
 );
 
 describe('App component', () => {

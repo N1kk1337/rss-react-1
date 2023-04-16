@@ -1,22 +1,26 @@
 import CatForm from '../../components/CatForm/CatForm';
 import MyCatCard from '../../components/CatForm/components/MyCatCard';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './FormsPage.module.scss';
 import { MyCatModel } from 'components/CatForm/components/MyCatModel';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store/store';
+import { addCat } from '../../store/slices/catsSlice';
 
 const FormsPage: React.FC = () => {
-  const [data, setData] = useState<MyCatModel[]>([]);
+  const cats = useSelector((state: RootState) => state.cats.cats);
+  const dispatch = useDispatch();
 
   const handleSubmit = (catData: MyCatModel) => {
-    setData([...data, catData]);
+    dispatch(addCat(catData));
   };
 
   return (
     <div className={styles['form-page']}>
       <CatForm onSubmit={handleSubmit} />
       <div className={styles['cat-cards']}>
-        {data.length !== 0 ? (
-          data.map((cat, index) => (
+        {cats.length !== 0 ? (
+          cats.map((cat, index) => (
             <MyCatCard
               key={index}
               name={cat.name}
