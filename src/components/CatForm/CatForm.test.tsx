@@ -4,6 +4,26 @@ import { fireEvent, waitFor } from '@testing-library/react';
 import CatForm from './CatForm';
 import { vi } from 'vitest';
 
+const mockSubmit = vi.fn();
+
+// describe('CatForm', () => {
+//   it('updates the img state when a file is selected', async () => {
+//     render(<CatForm onSubmit={mockSubmit} />);
+
+//     const imgInput = screen.getByLabelText(/Upload cat pic!/i);
+//     const file = new File(['data:image/png;base64,iVBORw0KG...'], 'cat.png', { type: 'image/png' });
+
+//     fireEvent.change(imgInput, {
+//       target: {
+//         files: [file],
+//       },
+//     });
+
+//     await waitFor(() => {
+//       expect(imgInput.getAttribute('value')).toBe('data:image/png;base64,iVBORw0KG...');
+//     });
+//   });
+// });
 test('shows error messages when required fields are empty', async () => {
   const onSubmit = vi.fn();
 

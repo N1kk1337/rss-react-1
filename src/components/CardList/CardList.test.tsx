@@ -1,73 +1,89 @@
-import axios from 'axios';
-import CardList from './CardList';
 import React from 'react';
-import { screen, render, waitFor } from '../../utils/test-utils';
-import { vi } from 'vitest';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import { render, screen, waitFor } from '../../utils/test-utils';
+import { API_BASE_URL } from '../../config/api';
+import CardList from './CardList';
 
-vi.mock('axios');
+const server = setupServer();
 
-const mockResponse = {
-  data: {
-    photos: {
-      photo: [
-        {
-          id: '1',
-          title: 'Test Photo',
-          ownername: 'Test Owner',
-          server: '123',
-          secret: 'abc',
-        },
-      ],
-    },
+const mockPhotosResponse = {
+  photos: {
+    photo: [
+      {
+        id: '1',
+        title: 'Test Photo',
+        ownername: 'Test Owner',
+        server: '123',
+        secret: 'abc',
+      },
+    ],
   },
 };
 
 describe('CardList', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
+  beforeAll(() => {
+    server.listen();
   });
 
-  test('renders the CardList component with photos', async () => {
-    (axios.get as jest.Mock).mockResolvedValue(mockResponse);
+  afterEach(() => {
+    server.resetHandlers();
+  });
+
+  afterAll(() => {
+    server.close();
+  });
+
+  test('renders CardList component with error message', async () => {
+    server.use(
+      rest.get(`${API_BASE_URL}`, (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
 
     render(<CardList searchValue="" />);
 
-    await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledTimes(1);
-    });
+    const errorMessage = await screen.findByText(/Error: 500/i);
+    expect(errorMessage).toBeInTheDocument();
+  });
 
-    const photoTitle = screen.getByText(/Test Photo/i);
-    const photographerName = screen.getByText(/Test Owner/i);
-    expect(photoTitle).toBeInTheDocument();
-    expect(photographerName).toBeInTheDocument();
+  test('renders CardList component with unknown error message', async () => {
+    server.use(
+      rest.get(`${API_BASE_URL}`, (req, res, ctx) => {
+        return res(ctx.json({}));
+      })
+    );
+
+    render(<CardList searchValue="" />);
+
+    const unknownErrorMessage = await screen.findByText(/Cannot read properties of undefined/i);
+    expect(unknownErrorMessage).toBeInTheDocument();
+  });
+  test('renders the CardList component with photos', async () => {
+    server.use(
+      rest.get(`${API_BASE_URL}`, (req, res, ctx) => {
+        return res(ctx.json(mockPhotosResponse));
+      })
+    );
+    render(<CardList searchValue="" />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Test Photo/i)).toBeInTheDocument();
+      expect(screen.getByText(/Test Owner/i)).toBeInTheDocument();
+    });
   });
 
   test('renders the CardList component with search results', async () => {
-    (axios.get as jest.Mock).mockResolvedValue(mockResponse);
-
+    server.use(
+      rest.get(`${API_BASE_URL}`, (req, res, ctx) => {
+        return res(ctx.json(mockPhotosResponse));
+      })
+    );
     render(<CardList searchValue="search" />);
 
     await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledTimes(1);
+      expect(screen.getByText(/Test Photo/i)).toBeInTheDocument();
+      expect(screen.getByText(/Test Owner/i)).toBeInTheDocument();
     });
-
-    const photoTitle = screen.getByText(/Test Photo/i);
-    const photographerName = screen.getByText(/Test Owner/i);
-    expect(photoTitle).toBeInTheDocument();
-    expect(photographerName).toBeInTheDocument();
-  });
-
-  test('handles error in API request', async () => {
-    (axios.get as jest.Mock).mockRejectedValue(new Error('API Error'));
-
-    console.error = vi.fn();
-
-    render(<CardList searchValue="" />);
-
-    await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledTimes(1);
-    });
-
-    expect(console.error).toHaveBeenCalledTimes(1);
   });
 });

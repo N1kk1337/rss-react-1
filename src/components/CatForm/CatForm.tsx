@@ -126,7 +126,8 @@ const CatForm: React.FC<CatFormProps> = ({ onSubmit }) => {
       </label>
 
       <label className={styles['form__upload']} htmlFor="img">
-        Upload cat pic! <input type="file" {...register('img')} onChange={handleFileChange} />
+        Upload cat pic!{' '}
+        <input type="file" {...register('img')} onChange={handleFileChange} id="img" />
       </label>
 
       <label className={styles['form__description']} htmlFor="description">

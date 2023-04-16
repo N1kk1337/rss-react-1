@@ -18,6 +18,7 @@ export default defineConfig({
         '**/utils/**',
         '**/config/**',
         '**/*Model.ts',
+        '**/store/**',
       ],
     },
     globals: true,
